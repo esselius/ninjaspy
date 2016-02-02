@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-source "${root}/assert.sh"
-
 asg_test() {
+	source "${root}/assert.sh"
+
 	assert_raises "true"
 	assert_end "asg"
 }
