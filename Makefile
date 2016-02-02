@@ -3,7 +3,8 @@
 NAME:=ninjaspy
 DOCKER_REPO:=esselius/$(NAME)
 
-SOURCE_CODE_FILES:=$(shell find src | grep .sh | grep -v assert.sh)
+LINTER_REPO:=jrotter/shellcheck
+SOURCE_CODE_FILES:=$(shell find src/entrypoint.sh src/lib/*)
 
 DOCKER_RUN:=docker run --rm -it
 
@@ -13,7 +14,7 @@ build:
 
 lint:
 	@docker rm $(NAME)-lint > /dev/null
-	@docker create --name $(NAME)-lint jrotter/shellcheck shellcheck $(SOURCE_CODE_FILES) > /dev/null
+	@docker create --name $(NAME)-lint $(LINTER_REPO) shellcheck $(SOURCE_CODE_FILES) > /dev/null
 	@docker cp . $(NAME)-lint:.
 	@docker start -ai $(NAME)-lint
 
