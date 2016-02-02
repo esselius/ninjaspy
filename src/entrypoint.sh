@@ -33,12 +33,12 @@ Usage: ${0} <action> [module]
 
 Actions:
 $(for action in "${actions[@]}"; do
-echo "- ${action}"
+	echo "- ${action}"
 done)
 
 Modules:
 $(for module in "${modules[@]}"; do
-echo "- ${module}"
+	echo "- ${module}"
 done)
 
 EOF
