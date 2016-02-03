@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
 
-asg_test() {
-	source "${ROOT}/assert.sh"
+asg_create() {
+	aws asg create-auto-scaling-group
+}
 
-	assert_raises "true"
-	assert_end "asg"
+asg_test() {
+	source "${ROOT}/test_helper.sh"
+
+	stub aws
+	asg_create < "${ROOT}/fixtures/asg.json"
+
+	assert_raises "stub_called aws"
+	assert_end "asg_create"
 }
